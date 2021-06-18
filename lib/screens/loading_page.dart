@@ -1,6 +1,8 @@
+import 'package:clima_flutter_app/screens/location_page.dart';
 import 'package:clima_flutter_app/services/location.dart';
 import 'package:clima_flutter_app/services/network_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animations/loading_animations.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -30,10 +32,21 @@ class _LoadingScreenState extends State<LoadingScreen> {
     var data = await networkHelper.getData();
 
     print(data);
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return LocationScreen();
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Container());
+    return Scaffold(
+      body: Center(
+        child: LoadingFlipping.square(
+          borderColor: Colors.cyan,
+          size: 30.0,
+        ),
+      ),
+    );
   }
 }
